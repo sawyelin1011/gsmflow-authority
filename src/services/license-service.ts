@@ -52,7 +52,7 @@ export class LicenseService {
     );
     
     // Save to database
-    const licenseToCreate = {
+    const licenseToCreate: any = {
       id: licenseId,
       tenant_id: params.tenant_id,
       plan_id: params.plan_id,

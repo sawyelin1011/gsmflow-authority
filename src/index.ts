@@ -31,10 +31,10 @@ export default {
       
       // Create router with configuration from environment
       const router = Router.create(db, cache, {
-        authSharedSecret: env.AUTH_SHARED_SECRET || '',
+        authSharedSecret: (env as any).AUTH_SHARED_SECRET || '',
         rateLimitRequestsPerMinute: parseInt(env.RATE_LIMIT_REQUESTS_PER_MINUTE || '100'),
-        privateKeyBase64: env.ED25519_PRIVATE_KEY || '',
-        publicKeyBase64: env.ED25519_PUBLIC_KEY || '',
+        privateKeyBase64: (env as any).ED25519_PRIVATE_KEY || '',
+        publicKeyBase64: (env as any).ED25519_PUBLIC_KEY || '',
       });
       
       // Route the request

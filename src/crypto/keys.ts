@@ -22,12 +22,12 @@ export async function generateKeyPair(): Promise<{
     ['sign', 'verify']
   );
 
-  const privateKey = await crypto.subtle.exportKey('pkcs8', keyPair.privateKey);
-  const publicKey = await crypto.subtle.exportKey('spki', keyPair.publicKey);
+  const privateKey = await crypto.subtle.exportKey('pkcs8', (keyPair as CryptoKeyPair).privateKey);
+  const publicKey = await crypto.subtle.exportKey('spki', (keyPair as CryptoKeyPair).publicKey);
 
   return {
-    privateKey: bytesToBase64(new Uint8Array(privateKey)),
-    publicKey: bytesToBase64(new Uint8Array(publicKey)),
+    privateKey: bytesToBase64(new Uint8Array(privateKey as ArrayBuffer)),
+    publicKey: bytesToBase64(new Uint8Array(publicKey as ArrayBuffer)),
   };
 }
 
