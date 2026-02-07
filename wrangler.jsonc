@@ -1,4 +1,6 @@
 /**
+ * GSMFlow License Authority Configuration
+ * 
  * For more details on how to configure Wrangler, refer to:
  * https://developers.cloudflare.com/workers/wrangler/configuration/
  */
@@ -10,35 +12,33 @@
 	"observability": {
 		"enabled": true
 	},
-	"compatibility_flags": [
-		"nodejs_compat"
+	
+	/**
+	 * D1 Database Binding
+	 * Stores tenant registry, license history, and audit logs
+	 */
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "gsmflow-authority",
+			"database_id": "44c9c419-8c5e-4f4b-be44-4a7d6b464b8e"
+		}
+	],
+	
+	/**
+	 * KV Namespace Binding
+	 * Stores revocation list and public key
+	 */
+	"kv_namespaces": [
+		{
+			"binding": "REVOCATIONS",
+			"id": "700565ede6044acaa8c8df092be9d77e"
+		}
 	]
+	
 	/**
-	 * Smart Placement
-	 * https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
+	 * Secrets (set via wrangler secret put)
+	 * - LICENSE_PRIVATE_KEY: Base64-encoded ED25519 private key
+	 * - HMAC_SECRET: HMAC-SHA256 secret for service authentication
 	 */
-	// "placement": {  "mode": "smart" }
-	/**
-	 * Bindings
-	 * Bindings allow your Worker to interact with resources on the Cloudflare Developer Platform, including
-	 * databases, object storage, AI inference, real-time communication and more.
-	 * https://developers.cloudflare.com/workers/runtime-apis/bindings/
-	 */
-	/**
-	 * Environment Variables
-	 * https://developers.cloudflare.com/workers/wrangler/configuration/#environment-variables
-	 * Note: Use secrets to store sensitive data.
-	 * https://developers.cloudflare.com/workers/configuration/secrets/
-	 */
-	// "vars": {  "MY_VARIABLE": "production_value" }
-	/**
-	 * Static Assets
-	 * https://developers.cloudflare.com/workers/static-assets/binding/
-	 */
-	// "assets": {  "directory": "./public/",  "binding": "ASSETS" }
-	/**
-	 * Service Bindings (communicate between multiple Workers)
-	 * https://developers.cloudflare.com/workers/wrangler/configuration/#service-bindings
-	 */
-	// "services": [  {   "binding": "MY_SERVICE",   "service": "my-service"  } ]
 }

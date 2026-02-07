@@ -1,0 +1,14 @@
+# Production Keys - DELETE THIS FILE AFTER SETUP!
+
+PRIVATE_KEY=MC4CAQAwBQYDK2VwBCIEIGA1BRcLpzrGqRfZZC3rQRze+if7eG8ckw0GrUDOxMD4
+PUBLIC_KEY=MCowBQYDK2VwAyEAcbf2x04rbkZCYzr07Eog2wkTX1i9VTuUos2MJD4gLRM=
+
+# Steps:
+# 1. wrangler secret put LICENSE_PRIVATE_KEY
+#    Paste: MC4CAQAwBQYDK2VwBCIEIGA1BRcLpzrGqRfZZC3rQRze+if7eG8ckw0GrUDOxMD4
+
+# 2. Generate HMAC: openssl rand -base64 32
+# 3. wrangler secret put HMAC_SECRET
+#    Paste the generated HMAC secret
+
+# 4. wrangler kv key put --binding REVOCATIONS --remote "public_key:v1" "MCowBQYDK2VwAyEAcbf2x04rbkZCYzr07Eog2wkTX1i9VTuUos2MJD4gLRM="

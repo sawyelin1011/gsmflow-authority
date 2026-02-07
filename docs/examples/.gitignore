@@ -1,0 +1,19 @@
+# Ignore test files and local modifications
+*.test.ts
+*.spec.ts
+*.local.*
+.env
+.env.local
+
+# Ignore build outputs
+dist/
+build/
+*.js
+*.js.map
+*.d.ts
+
+# Ignore node_modules if someone installs deps here
+node_modules/
+
+# Keep TypeScript source files
+!*.ts

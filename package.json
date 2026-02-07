@@ -1,17 +1,36 @@
 {
 	"name": "gsmflow-authority",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"private": true,
+	"description": "Production-grade License Authority for GSMFlow - cryptographic license issuance and revocation",
 	"scripts": {
 		"deploy": "wrangler deploy",
 		"dev": "wrangler dev",
 		"start": "wrangler dev",
 		"test": "vitest",
-		"cf-typegen": "wrangler types"
+		"test:endpoints": "tsx scripts/test-with-auth.ts",
+		"test:production": "tsx scripts/test-production.ts",
+		"cf-typegen": "wrangler types",
+		"db:create": "wrangler d1 create gsmflow-authority",
+		"db:migration:create": "wrangler d1 migrations create gsmflow-authority",
+		"db:migrate": "wrangler d1 migrations apply gsmflow-authority --remote",
+		"db:migrate:local": "wrangler d1 migrations apply gsmflow-authority --local",
+		"db:list": "wrangler d1 migrations list gsmflow-authority",
+		"db:execute": "wrangler d1 execute gsmflow-authority --remote",
+		"db:execute:local": "wrangler d1 execute gsmflow-authority --local",
+		"db:seed": "wrangler d1 execute gsmflow-authority --local --file=./scripts/seed-local.sql",
+		"db:init": "tsx scripts/init-database.ts",
+		"kv:create": "wrangler kv:namespace create REVOCATIONS",
+		"kv:create:preview": "wrangler kv:namespace create REVOCATIONS --preview",
+		"setup:keys": "tsx scripts/setup-keys.ts",
+		"setup:tenant": "tsx scripts/create-tenant.ts",
+		"setup:local": "npm run db:migrate:local && npm run db:seed",
+		"generate:hmac": "tsx scripts/generate-hmac.ts"
 	},
 	"devDependencies": {
 		"@cloudflare/vitest-pool-workers": "^0.12.4",
 		"@types/node": "^25.2.1",
+		"tsx": "^4.21.0",
 		"typescript": "^5.5.2",
 		"vitest": "~3.2.0",
 		"wrangler": "^4.63.0"
